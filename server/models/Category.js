@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const SubCategory = require('./SubCategory');
 
 const categorySchema = new mongoose.Schema(
   {
@@ -14,7 +15,7 @@ const categorySchema = new mongoose.Schema(
 );
 
 categorySchema.virtual('subCategories', {
-  ref: 'SubCategory',
+  ref: SubCategory,
   foreignField: 'category',
   localField: '_id',
   justOne: false,
