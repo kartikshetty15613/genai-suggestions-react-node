@@ -18,11 +18,31 @@ import { useNavigate } from 'react-router-dom';
 import styles from "../Stylesheet/Header.module.css"
 
 
-const Feedback = () => {
+const Feedback = ({CheckedItems}) => {
 
    const[FeedbackData , setFeedbackData] = useState([])
    const [allRatingsFilled, setAllRatingsFilled] = useState(false);
    const navigate = useNavigate()
+
+   //console.log(CheckedItems)
+   console.log(FeedbackData)
+
+  // const data = [{id:"1", name: "Finance & Accountability", 
+  //                 subcategories: [
+  //                   {id:"1-1", name: "Revenue & Profitability", comment: "", rating: 0 },
+  //                   {id:"1-2", name: "Cash Flow", comment: "", rating: 0 },
+  //                   {id:"1-3", name: "Liquidity & Solvency", comment: "", rating: 0 }
+  //                 ]
+  //               }, 
+                                  
+  //               {id:"2", name: "Customer Service", 
+  //                 subcategories: [
+  //                   {id:"2-1", name: "Customer Satisfaction (CSAT)", comment: "", rating: 0 }, 
+  //                   {id:"2-2", name: "Revenue Generation", comment: "", rating: 0 }, 
+  //                   {id:"2-3", name: "Net Promoter Score (NPS)", comment: "", rating: 0 }
+  //                 ] 
+  //               }
+  //         ]
 
 
    const handleRatingChange = (catIndex,subIndex,newRating)=>{
@@ -41,7 +61,8 @@ const Feedback = () => {
      e.preventDefault()
     if(allRatingsFilled)
     {
-        localStorage.setItem("UserFeedback", JSON.stringify(FeedbackData));
+        console.log(FeedbackData)
+        // localStorage.setItem("UserFeedback", JSON.stringify(FeedbackData));
         navigate("/graph")
     }
     
@@ -62,13 +83,16 @@ const Feedback = () => {
    
 
    useEffect(()=>{
-    const storedCheckedItems = localStorage.getItem("checkedItems");
+    // const storedCheckedItems = localStorage.getItem("checkedItems");
+    const storedCheckedItems = CheckedItems
     if (storedCheckedItems) {
-        let dataFromLocal = JSON.parse(storedCheckedItems)  // Array format
+        let dataFromLocal =   storedCheckedItems// Array format
         const updatedData = dataFromLocal.map(category => ({
+            id: category.id,
             name: category.name,
-            subcategories: category.subcategories.map(subcategory => ({
-              name: subcategory,
+            subcategories: category.subCategories.map(subcategory => ({
+              id:subcategory.id,
+              name: subcategory.name,
               comment: "",
               rating: 0
             }))
@@ -154,6 +178,8 @@ const Feedback = () => {
         </TableBody>
       </Table>
     </TableContainer>
+    
+
     </div>
   );
   
