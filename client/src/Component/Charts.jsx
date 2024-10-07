@@ -1,79 +1,128 @@
 import React, { useState, useEffect } from 'react';
-import CanvasJSReact from '@canvasjs/react-charts';
+import ReactApexChart from 'react-apexcharts';
 
- const CanvasJSChart = CanvasJSReact.CanvasJSChart;
+const data = [
+  {
+    name: "Finance & Accountability",
+    subcategories: [
+      { name: "Revenue & Profitability", comment: "", rating: 1 },
+      { name: "Cash Flow", comment: "", rating: 2 },
+      { name: "Liquidity & Solvency", comment: "", rating: 3 }
+    ]
+  },
+  {
+    name: "Customer Service",
+    subcategories: [
+      { name: "Customer Satisfaction (CSAT)", comment: "", rating: 5 },
+      { name: "Revenue Generation", comment: "", rating: 4 },
+      { name: "Net Promoter Score (NPS)", comment: "", rating: 3 }
+    ]
+  }
+]
 
 
 
 const Charts = () => {
-  const [categoriesData, setCategoriesData] = useState([])
-  
+  const [categoriesData, setCategoriesData] = useState(data)
 
-  const calculateCategoryRatings = ()=>{
-        return categoriesData.map((category)=>{
-            const totalRating = category.subcategories.reduce((sum,subcategory)=>sum+ Number(subcategory.rating),0)
-            //console.log({label:category.name , y:totalRating})
-            return {label:category.name , y:totalRating}
-    })
-  }
-  
+  // const fetchGraphsData = async()=>{
+  //      try {
+  //          const response = await fetch("url");
+  //          const res = await response.json();
+  //          console.log(res);
+  //          setCategoriesData(res.data)
+        
+  //      } catch (error) {
+  //         console.log(error)
+  //      }
+  // }
+
+
+  // Calculate total ratings for each category that is Y-Axis labels
+  const calculateCategoryRatings = () => {
+    return categoriesData.map(category => {
+      const totalRating = category.subcategories.reduce((sum, subcategory) => sum + subcategory.rating, 0);
+      return totalRating;
+    });
+  };
   //console.log(calculateCategoryRatings())
 
-  // Chart prepration function 
 
+  // Get category names for X-Axis labels
+  const categoryLabels = categoriesData.map(category => category.name);
+  // console.log(categoryLabels)
+
+
+  //Chart preparation method
   const chartOptions = {
-    animationEnabled: true,
-    exportEnabled: true,
+    chart: {
+      type: 'bar',
+      height: 350,
+      toolbar: {
+        show: false
+      }
+    },
+    plotOptions: {
+      bar: {
+        columnWidth: '40%', // Reduce the gap between columns
+        endingShape: 'rounded'
+      }
+    },
+    xaxis: {
+      categories: categoryLabels, // Use category names as labels on the X-axis
+      title: {
+        text: 'Categories',
+        style: {
+          fontSize: '16px'
+        }
+      }
+    },
+    yaxis: {
+      title: {
+        text: 'Total Rating',
+        style: {
+          fontSize: '16px'
+        }
+      },
+      min: 0,
+      max: 15// Adjust Y-axis max value based on total possible ratings
+    },
+    dataLabels: {
+      enabled: true
+    },
+    colors: ['#4CAF50'], // Column color
     title: {
-      text: "Category Ratings",
-      fontColor: "#4F81BC",  // Custom title color
-      fontSize: 20,          // Larger font size
-      fontFamily: "Arial"    // Font style
+      text: 'Category Ratings',
+      align: 'center',
+      style: {
+        fontSize: '20px'
+      }
     },
-    axisX: {
-      title: "Category",
-      labelFontSize: 13,  // Font size for X-axis labels
-      titleFontSize: 18,  // Font size for X-axis title
-      labelFontColor: "#333", // Custom label color
-      titleFontColor: "#4F81BC"  // Custom axis title color
-    },
-    axisY: {
-      title: "Total Rating",
-      labelFontSize: 15,  // Font size for Y-axis labels
-      titleFontSize: 18,  // Font size for Y-axis title
-      labelFontColor: "#333", // Custom label color
-      titleFontColor: "#4F81BC", // Custom axis title color
-      gridColor: "#E2E2E2",  // Gridline color
-      interval: 1            // Set interval between ticks
-    },
-    data: [{
-      type: "column",
-      indexLabel: "{y}",   // Display rating value above the column
-      indexLabelFontSize: 15,  // Font size for the labels on top of columns
-      indexLabelFontColor: "black",
-      dataPointWidth:50,
-      //color: "#4CAF50",   // Column color
-      dataPoints: calculateCategoryRatings()
-    }],
-    height: 400,  // Adjust chart height
-    width: 600    // Adjust chart width
-  };
- 
-
-
-  useEffect(()=>{
-    const storedCheckedItems = localStorage.getItem("UserFeedback");
-    if (storedCheckedItems) {
-        setCategoriesData(JSON.parse(storedCheckedItems));
+    tooltip: {
+      y: {
+        formatter: function (val) {
+          return val + " Ratings";
+        }
+      }
     }
-  },[])
+  };
+  
+  // Series data for the chart (Y-axis)
+  const chartSeries = [
+    {
+      name: "Total Rating",
+      data: calculateCategoryRatings()
+    }
+  ];
 
-  //console.log(categoriesData)
+  // useEffect(()=>{
+  //     fetchGraphsData()
+  // },[])
 
 
   return (
-    <div style={{padding:"20px"}}>
-         <CanvasJSChart options={chartOptions} />
+    <div style={{ padding: "20px" }}>
+      <ReactApexChart options={chartOptions} series={chartSeries} type="bar" height={350} />
     </div>
   )
 }
