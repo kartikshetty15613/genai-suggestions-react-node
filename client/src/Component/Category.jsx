@@ -19,7 +19,9 @@ const Category = ({ recieveCheckedItems }) => {
 
   const fetchCategories = async () => {
     try {
-      const response = await fetch(`${process.env.API_URL}/api/v1/categories`);
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/api/v1/categories`
+      );
       const res = await response.json();
       console.log(res.data);
       setCategory(res.data);

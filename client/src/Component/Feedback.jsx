@@ -75,7 +75,7 @@ const Feedback = ({ CheckedItems }) => {
 
         //console.log(filteredFeedbackData)
         const response = await fetch(
-          `${process.env.API_URL}/api/v1/feedbacks`,
+          `${process.env.REACT_APP_API_URL}/api/v1/feedbacks`,
           {
             method: "POST",
             headers: {
