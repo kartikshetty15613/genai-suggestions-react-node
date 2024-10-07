@@ -1,3 +1,4 @@
+const path = require('path');
 const cors = require('cors');
 const express = require('express');
 const categoryRouter = require('./routes/category.routes');
@@ -14,6 +15,10 @@ app.use(express.json());
 app.use('/api/v1/categories', categoryRouter);
 app.use('/api/v1/feedbacks', feedbackRouter);
 app.use('/api/v1/graphs', graphRouter);
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));

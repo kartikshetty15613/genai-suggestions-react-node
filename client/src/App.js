@@ -1,70 +1,38 @@
-
-import { Route, Routes, useNavigate } from 'react-router-dom';
-import Category from './Component/Category';
-import Feedback from './Component/Feedback';
-import Graphs from './Component/Graphs';
-import { useState } from 'react';
-
+import { Route, Routes, useNavigate } from "react-router-dom";
+import Category from "./Component/Category";
+import Feedback from "./Component/Feedback";
+import Graphs from "./Component/Graphs";
+import { useState } from "react";
 
 // const defaultCheckedItems = [];
 
-
-
 function App() {
-  
-  const[CheckedItems,setCheckedItems] = useState([])
-  
+  const [CheckedItems, setCheckedItems] = useState([]);
 
   const recieveCheckedItems = (data) => {
-    setCheckedItems(data)
-  }
+    setCheckedItems(data);
+  };
 
-  //console.log(CheckedItems)
+  console.log(process.env);
 
   return (
     <div className="App">
-        
-         <Routes>
-              <Route path='/' element={<Category recieveCheckedItems={recieveCheckedItems}/>}/>
-              <Route path='/feedback' element={<Feedback CheckedItems={CheckedItems}/>}/>
-              <Route path='/graph' element={<Graphs/>}/>
-         </Routes>
-      
+      <Routes>
+        <Route
+          path="/"
+          element={<Category recieveCheckedItems={recieveCheckedItems} />}
+        />
+        <Route
+          path="/feedback"
+          element={<Feedback CheckedItems={CheckedItems} />}
+        />
+        <Route path="/graph" element={<Graphs />} />
+      </Routes>
     </div>
   );
 }
 
 export default App;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // const categories = [
 //   {
@@ -210,4 +178,3 @@ export default App;
 //     ]
 //   }
 // ];
-

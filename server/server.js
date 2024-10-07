@@ -10,7 +10,7 @@ const app = require('./app');
 
 const DB = process.env.MONGODB_CONNECTION_URL.replace(
   '<MONGODB_PASSWORD>',
-  process.env.MONBODB_PASSWORD,
+  process.env.MONGODB_PASSWORD,
 );
 
 mongoose.connect(DB).then(() => console.log('DB connection successful!'));
