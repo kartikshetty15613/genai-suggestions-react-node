@@ -1,11 +1,11 @@
-import React from 'react'
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import styles from "../Stylesheet/Header.module.css"
-import Charts from './Charts';
-import Piechart from './Piechart';
+import React from "react";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import styles from "../Stylesheet/Header.module.css";
+import Charts from "./Charts";
+import Piechart from "./Piechart";
 
 const Graphs = () => {
   return (
@@ -21,12 +21,12 @@ const Graphs = () => {
       </Box>
       <br />
       <br />
-      <div style={{ display: "grid",gridTemplateColumns:"repeat(2,1fr)"}}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)" }}>
         <Charts />
         <Piechart />
       </div>
     </div>
   );
-}
+};
 
-export default Graphs
+export default Graphs;
