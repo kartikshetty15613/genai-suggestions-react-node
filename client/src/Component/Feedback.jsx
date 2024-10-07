@@ -74,13 +74,16 @@ const Feedback = ({ CheckedItems }) => {
         };
 
         //console.log(filteredFeedbackData)
-        const response = await fetch("http://localhost:3000/api/v1/feedbacks", {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(payload),
-        });
+        const response = await fetch(
+          `${process.env.API_URL}/api/v1/feedbacks`,
+          {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(payload),
+          }
+        );
         // if (!response.ok) {
         //   throw new Error("Failed to submit feedback")
         // }
