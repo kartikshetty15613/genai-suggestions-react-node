@@ -1,55 +1,49 @@
 import React, { useState, useEffect } from "react";
 import ReactApexChart from "react-apexcharts";
 
-const data = [
-  {
-    name: "Finance & Accountability",
-    subcategories: [
-      { name: "Revenue & Profitability", comment: "", rating: 1 },
-      { name: "Cash Flow", comment: "", rating: 2 },
-      { name: "Liquidity & Solvency", comment: "", rating: 3 },
-    ],
-  },
-  {
-    name: "Customer Service",
-    subcategories: [
-      { name: "Customer Satisfaction (CSAT)", comment: "", rating: 5 },
-      { name: "Revenue Generation", comment: "", rating: 4 },
-      { name: "Net Promoter Score (NPS)", comment: "", rating: 3 },
-    ],
-  },
-];
-
 const Charts = () => {
-  const [categoriesData, setCategoriesData] = useState(data);
+  const [categoriesData, setCategoriesData] = useState([]);
 
-  // const fetchGraphsData = async()=>{
-  //      try {
-  //          const response = await fetch("url");
-  //          const res = await response.json();
-  //          console.log(res);
-  //          setCategoriesData(res.data)
+  const fetchGraphsData = async () => {
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/api/v1/graphs`
+      );
+      const res = await response.json();
+      console.log(res.data);
+      setCategoriesData(res.data);
+      //  setCategoriesData(res.data)
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  //      } catch (error) {
-  //         console.log(error)
-  //      }
-  // }
+  useEffect(() => {
+    fetchGraphsData();
+  }, []);
 
+  //console.log(categoriesData)
   // Calculate total ratings for each category that is Y-Axis labels
   const calculateCategoryRatings = () => {
     return categoriesData.map((category) => {
-      const totalRating = category.subcategories.reduce(
-        (sum, subcategory) => sum + subcategory.rating,
-        0
-      );
-      return totalRating;
+      // Check if subCategories is defined and has length
+      if (category.subCategories && category.subCategories.length > 0) {
+        const totalRating = category.subCategories.reduce(
+          (sum, subcategory) => sum + (subcategory.ratingAvg || 0), // Use 0 if ratingAvg is undefined
+          0
+        );
+        return totalRating;
+      }
+      return 0; // Default to 0 if subCategories is undefined or empty
     });
   };
   //console.log(calculateCategoryRatings())
 
   // Get category names for X-Axis labels
-  const categoryLabels = categoriesData.map((category) => category.name);
-  // console.log(categoryLabels)
+  const categoryLabels = categoriesData.map(
+    (category) => category.category || ""
+  );
+  const columnColors = ["#4CAF50", "#FFA726", "#FF6384", "#36A2EB", "#FFCE56"];
 
   //Chart preparation method
   const chartOptions = {
@@ -64,10 +58,16 @@ const Charts = () => {
       bar: {
         columnWidth: "40%", // Reduce the gap between columns
         endingShape: "rounded",
+        distributed: true,
       },
     },
     xaxis: {
       categories: categoryLabels, // Use category names as labels on the X-axis
+      labels: {
+        style: {
+          fontSize: "9px",
+        },
+      },
       title: {
         text: "Categories",
         style: {
@@ -88,7 +88,7 @@ const Charts = () => {
     dataLabels: {
       enabled: true,
     },
-    colors: ["#4CAF50"], // Column color
+    colors: columnColors, // Column color
     title: {
       text: "Category Ratings",
       align: "center",
@@ -113,12 +113,8 @@ const Charts = () => {
     },
   ];
 
-  // useEffect(()=>{
-  //     fetchGraphsData()
-  // },[])
-
   return (
-    <div style={{ padding: "20px" }}>
+    <div style={{ padding: "30px" }}>
       <ReactApexChart
         options={chartOptions}
         series={chartSeries}
