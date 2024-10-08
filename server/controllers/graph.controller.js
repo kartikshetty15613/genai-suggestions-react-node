@@ -45,8 +45,17 @@ exports.getGraphData = catchAsync(async (req, res, next) => {
         category: {
           $first: '$category',
         },
-        avg: {
+        ratingAvg: {
           $avg: '$rating',
+        },
+      },
+    },
+    {
+      $project: {
+        _id: '$_id',
+        category: '$category',
+        ratingAvg: {
+          $round: ['$ratingAvg', 0],
         },
       },
     },
@@ -56,7 +65,7 @@ exports.getGraphData = catchAsync(async (req, res, next) => {
         subCategories: {
           $push: {
             name: '$_id',
-            avg: '$avg',
+            ratingAvg: '$ratingAvg',
           },
         },
       },
