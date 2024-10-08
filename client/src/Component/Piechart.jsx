@@ -35,7 +35,6 @@ const Piechart = () => {
       return 0; // Default to 0 if subcategories is undefined or empty
     });
   };
-  //console.log(calculateCategoryRatings())
 
   // Get category names for X-Axis labels
   const categoryLabels = categoriesData.map(
@@ -60,7 +59,7 @@ const Piechart = () => {
     dataLabels: {
       enabled: true,
       formatter: function (val) {
-        return val + "%";
+        return Math.round(val * 100) / 100 + "%";
       },
     },
     legend: {

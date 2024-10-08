@@ -37,7 +37,6 @@ const Charts = () => {
       return 0; // Default to 0 if subCategories is undefined or empty
     });
   };
-  //console.log(calculateCategoryRatings())
 
   // Get category names for X-Axis labels
   const categoryLabels = categoriesData.map(
