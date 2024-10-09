@@ -1,0 +1,114 @@
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding: 50px;
+  }
+
+
+/*  */
+
+.ideaForm {
+    width: 60%;
+    padding: 20px;
+  }
+   
+ h3,h4{
+    font-family: sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 25px; 
+    margin-bottom: 0px;
+    color: #022F5F;
+    opacity: 1;
+ }
+
+ p{
+    font-family: sans-serif;
+    font-size: 14px; 
+    font-weight: 400;
+    line-height: 25px; 
+    margin-bottom: 0px;
+    color: #022F5F;
+    opacity: 1;
+ }
+   
+  /* h3, h4 {
+    margin-top: 15px;
+    
+  } */
+
+
+  .ratingForm {
+    width: 30%;
+    height: 350px; 
+    background-color: #f8f8f8;
+    border: 1px solid #ccc;
+  }
+
+  .rateCommentText{
+    
+    background-color: #0095A2;
+    height: 60px;
+    font-size: 25px;
+    font-weight: 450;
+    text-align: center;
+    padding-top: 15px;
+  }
+
+  .stars{
+      height: 90px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+
+   
+  .commentBox {
+    width: 90%;
+    height: 100px;
+    /* margin-top: 15px;
+    padding: 10px;*/
+    border: 1px solid #ccc; 
+    border-radius: 0%;
+    
+  }
+   
+  .submitButton {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+
+
+
+
+
+
+
+
+  
+  /* .stars {
+    display: flex;
+    gap: 5px;
+  }
+   
+  .filledStar, .emptyStar {
+    font-size: 24px;
+    cursor: pointer;
+  }
+   
+  .filledStar {
+    color: gold;
+  }
+   
+  .emptyStar {
+    color: #ccc;
+  }
+   */
+  
