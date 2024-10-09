@@ -5,7 +5,7 @@ export default function BreadCrumbs({ crumbs = [] }) {
     <ul className={styles.breadcrumbs}>
       {crumbs.map((crumb, index) => (
         <li key={index} className={styles.crumb}>
-          {index !== crumbs.length - 1 ? `${crumb} /` : crumb}
+          {index !== crumbs.length - 1 ? `${crumb} \\` : crumb}
         </li>
       ))}
     </ul>

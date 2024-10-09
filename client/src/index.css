@@ -2,6 +2,8 @@
   --color-yellow-1: #ffba00;
 
   --color-blue-1: #022f5f;
+  --color-blue-2: #007bff;
+  --color-blue-3: #0095a2;
 
   --color-white: #fff;
   --color-grey: #c7c7c7;
@@ -33,6 +35,13 @@ textarea {
   width: 100%;
   font-family: inherit;
   border: none;
+  padding: 8px 12px;
+}
+
+textarea {
+  border: 1px solid var(--color-grey);
+  font-size: 16px;
+  border-radius: 5px;
 }
 
 .container {

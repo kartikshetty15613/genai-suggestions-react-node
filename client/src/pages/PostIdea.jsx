@@ -1,19 +1,46 @@
 import { useEffect, useState } from "react";
-import Button from "../components/Button";
-import Dropdown from "../components/Dropdown";
+import Modal from "react-modal";
+Modal.setAppElement("#root");
 
 import styles from "./PostIdea.module.css";
 
-import ideaFormImage from "../assets/idea-form-image.png";
+import Button from "../components/Button";
+import Dropdown from "../components/Dropdown";
 import BreadCrumbs from "../components/BreadCrumbs";
 import BreadCrumbsContainer from "../components/BreadCrumbsContainer";
+import FormError from "../components/FormError";
+
+import iconLightBulb from "../assets/icon-light-bulb.png";
+import ideaFormImage from "../assets/idea-form-image.png";
 
 export default function PostIdea() {
   const [categories, setCategories] = useState([]);
   const [title, setTitle] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState({});
-  const [selectedSubCategory, setSelectedSubCategory] = useState({});
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedSubCategory, setSelectedSubCategory] = useState(null);
   const [description, setDescription] = useState("");
+  const [error, setError] = useState("");
+  const [disable, setDisable] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const modalStyles = {
+    overlay: {
+      position: "fixed",
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      backgroundColor: "rgba(0, 0, 0, 0.5)",
+    },
+    content: {
+      maxWidth: "500px",
+      margin: "0px auto auto auto",
+      maxHeight: "250px",
+      padding: "40px",
+      borderRadius: "5px",
+      overflow: "visible",
+    },
+  };
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -47,11 +74,58 @@ export default function PostIdea() {
       (subCat) => subCat._id === e.target.value
     );
 
+    console.log({ selectedCategory, selectedSubCategory });
+
     setSelectedSubCategory(selectedSubCategory);
   };
 
-  const onIdeaSubmit = (e) => {
+  const onIdeaSubmit = async (e) => {
     e.preventDefault();
+
+    if (!selectedCategory || !selectedSubCategory) {
+      return setError("Please select a category and subcategory");
+    }
+
+    if (!title) {
+      return setError("Please give a title");
+    }
+
+    if (!description) {
+      return setError("Please describe your idea");
+    }
+
+    try {
+      setDisable(true);
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/v1/ideas`,
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({
+            title,
+            category: selectedCategory._id,
+            subCategory: selectedSubCategory._id,
+            description: description,
+            submittedBy: "John Doe",
+            role: "sales",
+          }),
+        }
+      );
+
+      setIsModalOpen(true);
+      setError("");
+    } catch (err) {
+      console.error(err);
+      setError("Something went wrong! Please try again later");
+    } finally {
+      setDisable(false);
+      setSelectedCategory(null);
+      setSelectedSubCategory(null);
+      setTitle("");
+      setDescription("");
+    }
   };
 
   return (
@@ -59,6 +133,20 @@ export default function PostIdea() {
       <BreadCrumbsContainer>
         <BreadCrumbs crumbs={["Home", "Post Idea"]} />
       </BreadCrumbsContainer>
+
+      <Modal isOpen={isModalOpen} style={modalStyles}>
+        <div className={styles.modalBody}>
+          <img src={iconLightBulb} alt="icon-light-bulb" />
+          <p className={styles.modalMessage}>Your idea has been submitted</p>
+        </div>
+
+        <div
+          className={styles.modalClose}
+          onClick={() => setIsModalOpen(false)}
+        >
+          X
+        </div>
+      </Modal>
 
       <div className="container">
         <div className={styles.postIdea}>
@@ -93,12 +181,22 @@ export default function PostIdea() {
 
             <div className={styles.row}>
               <label>Describe the idea*</label>
-              <textarea placeholder="Upto 250 words"></textarea>
+              <textarea
+                placeholder="Upto 250 words"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              ></textarea>
             </div>
 
+            {error && <FormError msg={error} />}
+
             <div className={styles.btnGroup}>
-              <Button type="submit">Submit</Button>
-              <Button type="cancel">Cancel</Button>
+              <Button type="submit" action="submit" disabled={disable}>
+                Submit
+              </Button>
+              <Button type="cancel" disabled={disable}>
+                Cancel
+              </Button>
             </div>
           </form>
 

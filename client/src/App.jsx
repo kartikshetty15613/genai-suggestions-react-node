@@ -10,10 +10,10 @@ function App() {
   return (
     <>
       <Routes>
+        <Route path="/" index element={<Home />} />
         <Route path="/" element={<AppLayout />}>
-          <Route index element={<Home />} />
-          <Route path="idea" element={<PostIdea />} />
-          <Route path="ideas/rate" element={<RateIdea />} />
+          <Route path="ideas/post" element={<PostIdea />} />
+          <Route path="ideas/:ideaId/rate" element={<RateIdea />} />
         </Route>
         <Route path="*" element={<PageNotFound />} />
       </Routes>
