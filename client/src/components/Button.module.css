@@ -1,8 +1,19 @@
 .btn {
+  outline: none;
+  border: none;
+  background: none;
+  padding: 10px 36px;
+  width: 125px;
+  color: var(--color-white);
+  font-size: 13px;
 }
 
 .submit {
+  background-color: var(--color-green);
+  color: var(--color-white);
 }
 
 .cancel {
+  background-color: var(--color-red);
+  color: var(--color-white);
 }

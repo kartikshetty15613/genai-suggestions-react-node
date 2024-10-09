@@ -1,3 +1,14 @@
+:root {
+  --color-yellow-1: #ffba00;
+
+  --color-blue-1: #022f5f;
+
+  --color-white: #fff;
+  --color-grey: #c7c7c7;
+  --color-green: #3baa0a;
+  --color-red: #c90000;
+}
+
 *,
 *::before,
 *::after {
@@ -10,6 +21,7 @@ html,
 body,
 #root {
   height: 100%;
+  font-family: "Helvetica Neue", sans-serif;
 }
 
 body {
@@ -19,9 +31,13 @@ body {
 input,
 textarea {
   width: 100%;
-  /* padding: 0.8rem 1.2rem; */
   font-family: inherit;
-  font-size: 1.6rem;
   border: none;
-  border-radius: 5px;
+}
+
+.container {
+  max-width: 2000px;
+  padding: 0px 50px;
+
+  margin: auto;
 }

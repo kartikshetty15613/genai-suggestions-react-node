@@ -1,8 +1,11 @@
-export default function Dropdown({ options }) {
+import styles from "./Dropdown.module.css";
+
+export default function Dropdown({ options, placeholder = "", onChange }) {
   return (
-    <select>
-      {options.map(({ name, id }) => (
-        <option key={id} value={id}>
+    <select className={styles.dropdown} defaultValue="" onChange={onChange}>
+      {placeholder && <option value="">{placeholder}</option>}
+      {options.map(({ name, _id }) => (
+        <option key={_id} value={_id}>
           {name}
         </option>
       ))}
