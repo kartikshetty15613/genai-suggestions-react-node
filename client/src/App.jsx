@@ -12,7 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<AppLayout />}>
           <Route index element={<Home />} />
-          <Route path="ideas/post" element={<PostIdea />} />
+          <Route path="idea" element={<PostIdea />} />
           <Route path="ideas/rate" element={<RateIdea />} />
         </Route>
         <Route path="*" element={<PageNotFound />} />
