@@ -1,0 +1,21 @@
+.header {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  display: block;
+  height: 100px;
+  width: auto;
+}
+
+.mainHeading {
+  text-transform: uppercase;
+  font-size: 36px;
+}
+
+.subHeading {
+  margin-left: auto;
+  margin-right: 50px;
+  font-size: 30px;
+}

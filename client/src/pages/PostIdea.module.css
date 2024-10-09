@@ -1,0 +1,18 @@
+.postIdea {
+  display: flex;
+}
+
+.postIdea img {
+  display: block;
+  height: 500px;
+  width: auto;
+}
+
+.form {
+  flex: 0 0 50%;
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+}
