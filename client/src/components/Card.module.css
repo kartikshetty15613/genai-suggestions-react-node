@@ -1,0 +1,134 @@
+.card {
+    height: 75px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* padding: 10px; */
+    padding-left: 10px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+   
+    background-color: #fff;
+  }
+   
+  .cardContent {
+    flex-grow: 1;  
+  }
+  .cardContent h3{
+    font-family: sans-serif;
+    color:#022F5F;
+    font-weight: 400;
+    line-height: 30px;
+    font-size: 17px;
+  }
+   
+  .cardActions {
+    display: flex;
+    align-items: center;
+  }
+   
+  .ratings {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+  }
+   
+  .filledStar {
+    color: gold;
+    margin-right: 5px;
+  }
+   
+  .emptyStar {
+    color: #ccc;
+    margin-right: 5px;
+  }
+   
+  .addComment {
+    margin-right: 20px;
+    color: #022F5F;
+  }
+   
+  .viewButton {
+    width: 120px;
+    height: 75px;
+    background-color: #0095a3;
+    color: white;
+    /* padding: 5px 10px; */
+    border: none;
+    cursor: pointer;
+  }
+   
+  .viewButton:hover {
+    background-color: #00796b;
+  }
+
+  /* Styles for Comment Box */
+
+  .commentBoxParent {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+
+  .commentBox {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+    max-width: 90%;
+    z-index: 1001;
+    text-align: center;
+  }
+
+  .commentBox h3 {
+    margin-bottom: 15px;
+  }
+   
+  .textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+
+
+  .modalActions {
+    display: flex;
+    justify-content: space-between;
+  }
+   
+  .saveButton {
+    background-color: #4CAF50;
+    color: white;
+    padding: 5px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+   
+  .cancelButton {
+    background-color: #f44336;
+    color: white;
+    padding: 5px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+   
+  .saveButton:hover {
+    background-color: #45a049;
+  }
+   
+  .cancelButton:hover {
+    background-color: #e53935;
+  } 
+  
+ 

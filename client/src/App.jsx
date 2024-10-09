@@ -5,6 +5,7 @@ import PostIdea from "./pages/PostIdea";
 import RateIdea from "./pages/RateIdea";
 import PageNotFound from "./pages/PageNotFound";
 import AppLayout from "./pages/AppLayout";
+import Ideas from "./pages/Ideas";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="idea" element={<PostIdea />} />
           <Route path="ideas/rate" element={<RateIdea />} />
+          <Route path="ideas/list" element={<Ideas />} />
         </Route>
         <Route path="*" element={<PageNotFound />} />
       </Routes>
