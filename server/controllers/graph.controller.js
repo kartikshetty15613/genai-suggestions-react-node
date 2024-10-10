@@ -1,8 +1,8 @@
 const catchAsync = require('../utils/catchAsync');
-const Feedback = require('../models/Feedback');
+const Idea = require('../models/Idea');
 
 exports.getGraphData = catchAsync(async (req, res, next) => {
-  const aggregation = await Feedback.aggregate([
+  const aggregation = await Idea.aggregate([
     {
       $lookup: {
         from: 'categories',
@@ -37,6 +37,7 @@ exports.getGraphData = catchAsync(async (req, res, next) => {
     {
       $addFields: {
         subCategory: '$subCategory.name',
+        rating: { $ifNull: ['$rating', 0] },
       },
     },
     {

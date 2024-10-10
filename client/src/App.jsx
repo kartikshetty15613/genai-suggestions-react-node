@@ -6,6 +6,7 @@ import RateIdea from "./pages/RateIdea";
 import PageNotFound from "./pages/PageNotFound";
 import AppLayout from "./pages/AppLayout";
 import Ideas from "./pages/Ideas";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/admin/ideas" element={<Ideas />} />
           <Route path="/ideas/post" element={<PostIdea />} />
           <Route path="/admin/ideas/:ideaId/rate" element={<RateIdea />} />
+          <Route path="/admin/dashboard" element={<Dashboard />} />
         </Route>
         <Route path="*" element={<PageNotFound />} />
       </Routes>
