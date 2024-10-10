@@ -13,7 +13,7 @@ export default function Home() {
         <h1>
           Envision your <span>Idea</span>
         </h1>
-        <img src={bulb} alt="Bulb" onClick={() => navigator("/categories")} />
+        <img src={bulb} alt="Bulb" onClick={() => navigator("/ideas/post")} />
         <p>
           A concept consists of all elements necessary to set an idea into
           motion.
