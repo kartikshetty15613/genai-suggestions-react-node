@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import Modal from "react-modal";
-Modal.setAppElement("#root");
+import Modal from "../components/Modal";
 
 import styles from "./PostIdea.module.css";
 
 import Button from "../components/Button";
+import Container from "../components/Container";
 import Dropdown from "../components/Dropdown";
 import BreadCrumbs from "../components/BreadCrumbs";
 import BreadCrumbsContainer from "../components/BreadCrumbsContainer";
@@ -22,25 +22,8 @@ export default function PostIdea() {
   const [error, setError] = useState("");
   const [disable, setDisable] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const modalStyles = {
-    overlay: {
-      position: "fixed",
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      backgroundColor: "rgba(0, 0, 0, 0.5)",
-    },
-    content: {
-      maxWidth: "500px",
-      margin: "0px auto auto auto",
-      maxHeight: "250px",
-      padding: "40px",
-      borderRadius: "5px",
-      overflow: "visible",
-    },
-  };
+  const [modalMessage, setModalMessage] = useState("");
+  const [modalType, setModalType] = useState("");
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -74,8 +57,6 @@ export default function PostIdea() {
       (subCat) => subCat._id === e.target.value
     );
 
-    console.log({ selectedCategory, selectedSubCategory });
-
     setSelectedSubCategory(selectedSubCategory);
   };
 
@@ -96,28 +77,31 @@ export default function PostIdea() {
 
     try {
       setDisable(true);
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/v1/ideas`,
-        {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify({
-            title,
-            category: selectedCategory._id,
-            subCategory: selectedSubCategory._id,
-            description: description,
-            submittedBy: "John Doe",
-            role: "sales",
-          }),
-        }
-      );
-
       setIsModalOpen(true);
+      setModalType("loading");
+
+      await fetch(`${import.meta.env.VITE_API_URL}/api/v1/ideas`, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          title,
+          category: selectedCategory._id,
+          subCategory: selectedSubCategory._id,
+          description: description,
+          submittedBy: "John Doe",
+          role: "sales",
+        }),
+      });
+
+      setModalType("idea-(create/update)");
+      setModalMessage("Idea submitted successfully");
+
       setError("");
     } catch (err) {
       console.error(err);
+      setIsModalOpen(true);
       setError("Something went wrong! Please try again later");
     } finally {
       setDisable(false);
@@ -134,21 +118,14 @@ export default function PostIdea() {
         <BreadCrumbs crumbs={["Home", "Post Idea"]} />
       </BreadCrumbsContainer>
 
-      <Modal isOpen={isModalOpen} style={modalStyles}>
-        <div className={styles.modalBody}>
-          <img src={iconLightBulb} alt="icon-light-bulb" />
-          <p className={styles.modalMessage}>Your idea has been submitted</p>
-        </div>
+      <Modal
+        isOpen={isModalOpen}
+        toggleModal={setIsModalOpen}
+        type={modalType}
+        msg={modalMessage}
+      ></Modal>
 
-        <div
-          className={styles.modalClose}
-          onClick={() => setIsModalOpen(false)}
-        >
-          X
-        </div>
-      </Modal>
-
-      <div className="container">
+      <Container>
         <div className={styles.postIdea}>
           <form className={styles.form} onSubmit={onIdeaSubmit}>
             <div className={styles.row}>
@@ -204,7 +181,7 @@ export default function PostIdea() {
             <img src={ideaFormImage} alt="Idea form Image" />
           </div>
         </div>
-      </div>
+      </Container>
     </>
   );
 }

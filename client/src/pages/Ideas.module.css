@@ -1,0 +1,21 @@
+.feedbackButton {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  /* border-radius: 5px; */
+  cursor: pointer;
+  /* margin: 20px 0; */
+  display: block;
+  text-align: center;
+  height: 45px;
+}
+
+.feedbackButton:hover {
+  background-color: #45a049;
+}
+
+.ideaListContainer {
+  margin-top: 70px;
+  padding-bottom: 100px;
+}

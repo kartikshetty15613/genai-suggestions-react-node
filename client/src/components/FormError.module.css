@@ -1,4 +1,4 @@
-.msgError {
+.errorMsg {
   color: var(--color-red);
   display: inline-block;
   margin: 10px 0;
