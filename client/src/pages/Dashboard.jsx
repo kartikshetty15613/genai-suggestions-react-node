@@ -36,7 +36,7 @@ export default function Dashboard() {
           <BreadCrumbs
             crumbs={[
               { text: "Home", linkTo: window.location.origin },
-              { text: "Dashboard", linkTo: "/admin/dashboard" },
+              { text: "Dashboard", linkTo: "/dashboard" },
             ]}
           />
           <Button
