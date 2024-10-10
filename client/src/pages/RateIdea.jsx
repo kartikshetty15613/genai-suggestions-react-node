@@ -16,7 +16,6 @@ export default function RateIdea() {
   const [idea, setIdea] = useState({});
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
-
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   const [modalType, setModalType] = useState("");
@@ -72,7 +71,13 @@ export default function RateIdea() {
   return (
     <>
       <BreadCrumbsContainer>
-        <BreadCrumbs crumbs={["Home", "Ideas", "Rate Idea"]} />
+        <BreadCrumbs
+          crumbs={[
+            { text: "Home", linkTo: window.location.origin },
+            { text: "Ideas", linkTo: "/admin/ideas" },
+            { text: "Rate your idea", linkTo: `/admin/ideas/${ideaId}` },
+          ]}
+        />
       </BreadCrumbsContainer>
 
       <Modal

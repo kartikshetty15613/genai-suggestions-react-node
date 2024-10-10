@@ -50,6 +50,8 @@ export default function PostIdea() {
       (cat) => cat._id === e.target.value
     );
 
+    selectedCategory.subCategories.sort((a, b) => a.name.localeCompare(b.name));
+
     setSelectedCategory(selectedCategory);
   };
 
@@ -120,7 +122,12 @@ export default function PostIdea() {
   return (
     <>
       <BreadCrumbsContainer>
-        <BreadCrumbs crumbs={["Home", "Post Idea"]} />
+        <BreadCrumbs
+          crumbs={[
+            { text: "Home", linkTo: window.location.origin },
+            { text: "Post your ideas", linkTo: "/ideas/post" },
+          ]}
+        />
       </BreadCrumbsContainer>
 
       <Modal

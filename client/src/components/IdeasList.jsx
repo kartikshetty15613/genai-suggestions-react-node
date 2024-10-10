@@ -2,10 +2,11 @@ import { useState } from "react";
 import IdeasListItem from "./IdeasListItem";
 import Button from "../components/Button";
 import Pagination from "../components/Pagination";
+import Modal from "./Modal";
 
 import styles from "./IdeasList.module.css";
 
-export default function IdeasList({ ideas, onFeedbackSubmit }) {
+export default function IdeasList({ ideas, onFeedbackSubmit, onAddComment }) {
   const [currentPage, setCurrentPage] = useState(2);
   const [totalPages, setTotalPages] = useState(10);
 
@@ -19,14 +20,6 @@ export default function IdeasList({ ideas, onFeedbackSubmit }) {
     });
   };
 
-  const handleAddComment = (ideaId, comment) => {
-    ideas.forEach((idea) => {
-      if (idea._id === ideaId) idea.comment = comment;
-    });
-
-    console.log(ideas);
-  };
-
   const handleNext = (e) => {
     e.preventDefault();
   };
@@ -34,6 +27,7 @@ export default function IdeasList({ ideas, onFeedbackSubmit }) {
   const handlePrevious = (e) => {
     e.preventDefault();
   };
+
   return (
     <ul className={styles.ideaList}>
       {ideas.map((idea) => (
@@ -41,7 +35,7 @@ export default function IdeasList({ ideas, onFeedbackSubmit }) {
           key={idea._id}
           idea={idea}
           onRatingChange={handleRatingChange}
-          onAddComment={handleAddComment}
+          onAddComment={onAddComment}
         />
       ))}
 

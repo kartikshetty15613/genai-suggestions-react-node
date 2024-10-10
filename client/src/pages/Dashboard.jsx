@@ -29,7 +29,12 @@ export default function Dashboard() {
   return (
     <>
       <BreadCrumbsContainer>
-        <BreadCrumbs crumbs={["Home", "Dashboard"]} />
+        <BreadCrumbs
+          crumbs={[
+            { text: "Home", linkTo: window.location.origin },
+            { text: "Dashboard", linkTo: "/admin/dashboard" },
+          ]}
+        />
       </BreadCrumbsContainer>
 
       <Container>

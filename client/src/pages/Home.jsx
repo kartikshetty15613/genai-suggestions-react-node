@@ -8,7 +8,7 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
-      <section className={styles.heading}>
+      <div className={styles.heading}>
         <h3>Enterprise AI</h3>
         <h1>
           Envision your <span>Idea</span>
@@ -18,8 +18,8 @@ export default function Home() {
           A concept consists of all elements necessary to set an idea into
           motion.
         </p>
-      </section>
-      <section className={styles.counter}>
+      </div>
+      <div className={styles.counter}>
         <img src={iconBulb} alt="icon-bulb" />
 
         <div className={styles.counters}>
@@ -27,7 +27,7 @@ export default function Home() {
           <span>5</span>
           <span>5</span>
         </div>
-      </section>
+      </div>
     </main>
   );
 }

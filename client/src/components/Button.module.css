@@ -19,15 +19,16 @@
 
 .submit {
   background-color: var(--color-green);
-  color: var(--color-white);
 }
 
 .cancel {
   background-color: var(--color-red);
-  color: var(--color-white);
 }
 
 .rate {
   background-color: var(--color-blue-1);
-  color: var(--color-white);
+}
+
+.view {
+  background-color: var(--color-blue-3);
 }

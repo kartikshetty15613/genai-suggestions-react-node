@@ -9,7 +9,7 @@ export default function Modal({
   isOpen,
   toggleModal,
   children,
-  type = "loading",
+  type,
   msg = "Post your success message",
 }) {
   const modalStyles = {
