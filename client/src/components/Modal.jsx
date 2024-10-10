@@ -23,7 +23,7 @@ export default function Modal({
     },
     content: {
       maxWidth: "500px",
-      margin: "0px auto auto auto",
+      margin: "auto",
       maxHeight: "250px",
       padding: "40px",
       borderRadius: "5px",
@@ -38,6 +38,7 @@ export default function Modal({
           <>
             <img src={iconLightBulb} alt="icon-light-bulb" />
             <p className={styles.successMessage}>{msg}</p>
+            {children}
           </>
         )}
 

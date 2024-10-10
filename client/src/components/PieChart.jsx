@@ -31,17 +31,36 @@ export default function Piechart({ data = [] }) {
       align: "center",
       style: {
         fontSize: "20px",
+        fontFamily: "Open Sans",
       },
     },
-    colors: ["#4CAF50", "#FFA726", "#FF6384", "#36A2EB", "#FFCE56"], // Custom colors for pie slices
+    colors: [
+      "#B9D6EB",
+      "#FFC58A",
+      "#7EDD7B",
+      "#EC9C9E",
+      "#A6D6D6",
+      "#BDAED6",
+      "#CBA39E",
+      "#FF8EFF",
+      "#D3DEA3",
+    ], // Custom colors for pie slices
     dataLabels: {
       enabled: true,
       formatter: function (val) {
         return Math.round(val * 100) / 100 + "%";
       },
+      style: {
+        colors: ["#000"], // Set the font color to black
+        fontWeight: "lighter",
+      },
     },
+    tooltip: { style: { fontSize: "12px", fontWeight: "bold", color: "#000" } },
     legend: {
       position: "bottom",
+      style: {
+        colors: ["#000"], // Set the font color to black
+      },
     },
   };
 

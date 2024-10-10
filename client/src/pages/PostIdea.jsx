@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Rating } from "react-simple-star-rating";
+
 import Modal from "../components/Modal";
 
 import styles from "./PostIdea.module.css";
@@ -11,13 +13,13 @@ import BreadCrumbs from "../components/BreadCrumbs";
 import BreadCrumbsContainer from "../components/BreadCrumbsContainer";
 import FormError from "../components/FormError";
 
-import ideaFormImage from "../assets/idea-form-image.png";
-
 export default function PostIdea() {
   const [categories, setCategories] = useState([]);
   const [title, setTitle] = useState("");
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedSubCategory, setSelectedSubCategory] = useState(null);
+  const [rating, setRating] = useState(0);
+  const [comment, setComment] = useState("");
   const [description, setDescription] = useState("");
   const [error, setError] = useState("");
   const [disable, setDisable] = useState(false);
@@ -63,20 +65,47 @@ export default function PostIdea() {
     setSelectedSubCategory(selectedSubCategory);
   };
 
+  const handleYesClick = () => {
+    navigate(0);
+  };
+
   const onIdeaSubmit = async (e) => {
     e.preventDefault();
 
-    if (!selectedCategory || !selectedSubCategory) {
-      return setError("Please select a category and subcategory");
+    if (
+      !title ||
+      !selectedCategory ||
+      !selectedSubCategory ||
+      !description ||
+      !rating ||
+      !comment
+    ) {
+      return setError("Please fill all required fields");
     }
 
-    if (!title) {
-      return setError("Please give a title");
-    }
+    // if (!title) {
+    //   return setError("Please add title");
+    // }
 
-    if (!description) {
-      return setError("Please describe your idea");
-    }
+    // if (!selectedCategory) {
+    //   return setError("Please select category");
+    // }
+
+    // if (!selectedSubCategory) {
+    //   return setError("Please select subcategory");
+    // }
+
+    // if (!description) {
+    //   return setError("Please describe your idea");
+    // }
+
+    // if (!rating) {
+    //   return setError("Please add rating");
+    // }
+
+    // if (!comment) {
+    //   return setError("Please add comment");
+    // }
 
     try {
       setDisable(true);
@@ -95,6 +124,8 @@ export default function PostIdea() {
           description: description,
           submittedBy: "John Doe",
           role: "sales",
+          comment,
+          rating,
         }),
       });
 
@@ -103,20 +134,31 @@ export default function PostIdea() {
 
       setError("");
 
-      setTimeout(() => {
-        navigate("/");
-      }, 1000);
+      // setTimeout(() => {
+      //   navigate("/");
+      // }, 1000);
     } catch (err) {
       console.error(err);
       setIsModalOpen(true);
       setError("Something went wrong! Please try again later");
     } finally {
       setDisable(false);
-      setSelectedCategory(null);
-      setSelectedSubCategory(null);
+      setSelectedCategory("");
+      setSelectedSubCategory("");
       setTitle("");
       setDescription("");
+      setRating(0);
+      setComment("");
     }
+  };
+
+  const handleReset = () => {
+    setSelectedCategory("");
+    setSelectedSubCategory("");
+    setTitle("");
+    setDescription("");
+    setRating(0);
+    setComment("");
   };
 
   return (
@@ -135,63 +177,119 @@ export default function PostIdea() {
         toggleModal={setIsModalOpen}
         type={modalType}
         msg={modalMessage}
-      ></Modal>
+      >
+        <br />
+        <p>Do you want to submit another idea ?</p>
+        <div className={`${styles.modalBtnGroup} ${styles.btnGroup}`}>
+          <Button type="submit" onClick={handleYesClick}>
+            Yes
+          </Button>
+          <Button type="cancel" onClick={() => navigate("/dashboard")}>
+            No
+          </Button>
+        </div>
+      </Modal>
 
       <Container>
         <div className={styles.postIdea}>
-          <form className={styles.form} onSubmit={onIdeaSubmit}>
-            <div className={styles.row}>
-              <label htmlFor="idea-title">Idea Title*</label>
-              <input
-                type="text"
-                id="idea-title"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-              />
+          <form className={styles.form}>
+            <div className={styles.formSectionOne}>
+              <div className={styles.row}>
+                <label htmlFor="idea-title">
+                  Idea Title <span className="required">*</span>
+                </label>
+                <input
+                  type="text"
+                  required
+                  id="idea-title"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                />
+              </div>
+
+              <div className={styles.row}>
+                <label htmlFor="category">
+                  Category <span className="required">*</span>
+                </label>
+                <Dropdown
+                  options={categories}
+                  placeholder="Select Category"
+                  onChange={onCategoryChange}
+                />
+              </div>
+
+              <div className={styles.row}>
+                <label>
+                  Sub Category <span className="required">*</span>
+                </label>
+                <Dropdown
+                  options={selectedCategory?.subCategories || []}
+                  placeholder="Select Subcategory"
+                  onChange={onSubCategoryChange}
+                />
+              </div>
+
+              <div className={styles.row}>
+                <label>
+                  Describe the idea <span className="required">*</span>
+                </label>
+                <textarea
+                  placeholder="Upto 250 words"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                ></textarea>
+              </div>
             </div>
 
-            <div className={styles.row}>
-              <label htmlFor="category">Category*</label>
-              <Dropdown
-                options={categories}
-                placeholder="Select Category"
-                onChange={onCategoryChange}
-              />
+            <div className={styles.formSectionTwo}>
+              <div className={styles.row}>
+                <label>
+                  Rate your idea <span className="required">*</span>{" "}
+                  <div className="tooltip">
+                    <i className="fa fa-info-circle"></i>
+                    <span className="tooltiptext">Guidelines</span>
+                  </div>
+                </label>
+
+                <Rating size={30} onClick={(e) => setRating(e)} />
+              </div>
+
+              <div className={styles.row}>
+                <label>
+                  Comments <span className="required">*</span>{" "}
+                  <div className="tooltip">
+                    <i className="fa fa-info-circle"></i>
+                    <span className="tooltiptext">Guidelines</span>
+                  </div>
+                </label>
+                <textarea
+                  placeholder="Upto 250 words"
+                  value={comment}
+                  onChange={(e) => setComment(e.target.value)}
+                ></textarea>
+              </div>
             </div>
 
-            <div className={styles.row}>
-              <label>Sub Category</label>
-              <Dropdown
-                options={selectedCategory?.subCategories || []}
-                placeholder="Select Subcategory"
-                onChange={onSubCategoryChange}
-              />
-            </div>
-
-            <div className={styles.row}>
-              <label>Describe the idea*</label>
-              <textarea
-                placeholder="Upto 250 words"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-              ></textarea>
-            </div>
-
-            {error && <FormError msg={error} />}
-
-            <div className={styles.btnGroup}>
-              <Button type="submit" action="submit" disabled={disable}>
-                Submit
-              </Button>
-              <Button type="cancel" disabled={disable}>
-                Cancel
-              </Button>
-            </div>
+            <div className={styles.imgContainer}></div>
           </form>
 
-          <div className={styles.imgContainer}>
-            <img src={ideaFormImage} alt="Idea form Image" />
+          {error && <FormError msg={error} />}
+
+          <div className={styles.btnGroup}>
+            <Button
+              type="submit"
+              action="submit"
+              disabled={disable}
+              onClick={onIdeaSubmit}
+            >
+              Submit
+            </Button>
+            <Button type="cancel" disabled={disable} onClick={handleReset}>
+              Reset
+            </Button>
           </div>
+
+          {/* <img src={ideaFormImage} alt="Idea form Image" /> */}
         </div>
       </Container>
     </>

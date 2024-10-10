@@ -17,7 +17,18 @@ export default function Chart({ data }) {
 
   // Get category names for X-Axis labels
   const categoryLabels = data.map((category) => category.category || "");
-  const columnColors = ["#4CAF50", "#FFA726", "#FF6384", "#36A2EB", "#FFCE56"];
+  //   const columnColors = ["#4CAF50", "#FFA726", "#FF6384", "#36A2EB", "#FFCE56"];
+  const columnColors = [
+    "#B9D6EB",
+    "#FFC58A",
+    "#7EDD7B",
+    "#EC9C9E",
+    "#A6D6D6",
+    "#BDAED6",
+    "#CBA39E",
+    "#FF8EFF",
+    "#D3DEA3",
+  ];
 
   //Chart preparation method
   const chartOptions = {
@@ -35,25 +46,32 @@ export default function Chart({ data }) {
         distributed: true,
       },
     },
+    legend: {
+      show: false,
+    },
     xaxis: {
       categories: categoryLabels, // Use category names as labels on the X-axis
       labels: {
         style: {
-          fontSize: "9px",
+          fontSize: "12px",
+          fontFamily: "Open Sans",
         },
+        offsetY: -5,
       },
-      title: {
-        text: "Categories",
-        style: {
-          fontSize: "16px",
-        },
-      },
+      //   title: {
+      //     text: "Categories",
+      //     style: {
+      //       fontSize: "16px",
+      //       fontFamily: "Open Sans",
+      //     },
+      //   },
     },
     yaxis: {
       title: {
         text: "Total Rating",
         style: {
           fontSize: "16px",
+          fontFamily: "Open Sans",
         },
       },
       min: 0,
@@ -61,6 +79,9 @@ export default function Chart({ data }) {
     },
     dataLabels: {
       enabled: true,
+      style: {
+        colors: ["#000"], // Set the font color to black
+      },
     },
     colors: columnColors, // Column color
     title: {
@@ -68,6 +89,7 @@ export default function Chart({ data }) {
       align: "center",
       style: {
         fontSize: "20px",
+        fontFamily: "Open Sans",
       },
     },
     tooltip: {
@@ -88,13 +110,11 @@ export default function Chart({ data }) {
   ];
 
   return (
-    <div style={{ padding: "30px" }}>
-      <ReactApexChart
-        options={chartOptions}
-        series={chartSeries}
-        type="bar"
-        height={350}
-      />
-    </div>
+    <ReactApexChart
+      options={chartOptions}
+      series={chartSeries}
+      type="bar"
+      height={450}
+    />
   );
 }

@@ -13,13 +13,23 @@ export default function Home() {
         <h1>
           Envision your <span>Idea</span>
         </h1>
-        <img src={bulb} alt="Bulb" onClick={() => navigator("/ideas/post")} />
+        <img
+          title="Post your idea"
+          src={bulb}
+          alt="Post your idea"
+          onClick={() => navigator("/ideas/post")}
+        />
+        <p>
+          <a onClick={() => navigator("/ideas/post")}>
+            Click to post your ideas
+          </a>
+        </p>
         <p>
           A concept consists of all elements necessary to set an idea into
           motion.
         </p>
       </div>
-      <div className={styles.counter}>
+      {/* <div className={styles.counter}>
         <img src={iconBulb} alt="icon-bulb" />
 
         <div className={styles.counters}>
@@ -27,7 +37,7 @@ export default function Home() {
           <span>5</span>
           <span>5</span>
         </div>
-      </div>
+      </div> */}
     </main>
   );
 }

@@ -7,3 +7,13 @@
 .chartsContainer > * {
   flex-grow: 1;
 }
+
+.backBtnContainer {
+  display: flex;
+}
+
+.backBtn {
+  margin-left: auto;
+  width: 265px;
+  font-weight: bold;
+}

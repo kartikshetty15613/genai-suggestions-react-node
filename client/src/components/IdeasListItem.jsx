@@ -28,14 +28,14 @@ export default function IdeaListItem({ idea, onRatingChange, onAddComment }) {
           <span>Comments</span>
         </div>
 
-        <Button
+        {/* <Button
           className={styles.viewBtn}
           type="view"
           action="button"
           onClick={() => navigate(`/admin/ideas/${idea._id}/rate`)}
         >
           View
-        </Button>
+        </Button> */}
       </div>
     </div>
   );

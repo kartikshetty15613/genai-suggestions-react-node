@@ -17,6 +17,10 @@
   margin-bottom: 24px;
 }
 
+.footerContainer .btnGroup {
+  margin-left: auto;
+}
+
 .paginatorContainer {
   flex-grow: 1;
 }
@@ -26,4 +30,8 @@
   width: 200px;
   font-size: 13px;
   padding: 10px 24px;
+}
+
+.feedbackSubmit:not(:last-child) {
+  margin-right: 10px;
 }

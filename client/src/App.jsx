@@ -14,10 +14,10 @@ function App() {
       <Routes>
         <Route path="/" index element={<Home />} />
         <Route path="/" element={<AppLayout />}>
-          <Route path="/admin/ideas" element={<Ideas />} />
           <Route path="/ideas/post" element={<PostIdea />} />
-          <Route path="/admin/ideas/:ideaId/rate" element={<RateIdea />} />
-          <Route path="/admin/dashboard" element={<Dashboard />} />
+          {/* <Route path="/admin/ideas" element={<Ideas />} />
+          <Route path="/admin/ideas/:ideaId/rate" element={<RateIdea />} /> */}
+          <Route path="/dashboard" element={<Dashboard />} />
         </Route>
         <Route path="*" element={<PageNotFound />} />
       </Routes>

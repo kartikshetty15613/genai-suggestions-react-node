@@ -57,6 +57,10 @@ export default function Ideas() {
     });
   };
 
+  const handleNextClick = () => {
+    navigate("/admin/dashboard");
+  };
+
   const handleAddComment = (ideaId) => {
     setIdeaToComment(ideaId);
     setIsCommentModalOpen(true);
@@ -170,16 +174,25 @@ export default function Ideas() {
             </div>
 
             <div className={styles.footerContainer}>
-              <div className={styles.paginatorContainer}>
+              {/* <div className={styles.paginatorContainer}>
                 <Pagination currentPage={currentPage} totalPages={totalPages} />
-              </div>
+              </div> */}
 
-              <Button
-                className={styles.feedbackSubmit}
-                onClick={handleIdeasBulkUpdate}
-              >
-                Submit Your Feedback
-              </Button>
+              <div className={styles.btnGroup}>
+                <Button
+                  className={styles.feedbackSubmit}
+                  onClick={handleIdeasBulkUpdate}
+                >
+                  Submit Your Feedback
+                </Button>
+
+                <Button
+                  className={styles.feedbackSubmit}
+                  onClick={handleNextClick}
+                >
+                  Next
+                </Button>
+              </div>
             </div>
             <br />
           </>
