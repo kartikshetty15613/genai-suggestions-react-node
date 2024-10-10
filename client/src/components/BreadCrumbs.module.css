@@ -1,0 +1,10 @@
+.breadcrumbs {
+  list-style-type: none;
+  display: flex;
+  color: var(--color-white);
+}
+
+.crumb {
+  display: inline-block;
+  padding: 4px;
+}

@@ -1,0 +1,33 @@
+.btn {
+  outline: none;
+  border: none;
+  background: none;
+  padding: 10px 36px;
+
+  color: var(--color-white);
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.default {
+  width: 125px;
+}
+
+.full {
+  width: 100%;
+}
+
+.submit {
+  background-color: var(--color-green);
+  color: var(--color-white);
+}
+
+.cancel {
+  background-color: var(--color-red);
+  color: var(--color-white);
+}
+
+.rate {
+  background-color: var(--color-blue-1);
+  color: var(--color-white);
+}
