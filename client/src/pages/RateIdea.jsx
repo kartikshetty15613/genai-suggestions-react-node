@@ -64,6 +64,10 @@ export default function RateIdea() {
 
       setModalType("idea-(create/update)");
       setModalMessage("Rating updated successfully");
+
+      setTimeout(() => {
+        navigate("/admin/ideas");
+      }, 1000);
     } catch (err) {
       console.error(err);
     }
