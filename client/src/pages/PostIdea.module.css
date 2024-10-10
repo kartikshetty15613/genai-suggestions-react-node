@@ -22,7 +22,7 @@
 
 .row input,
 .row textarea {
-  border: 1px solid var(--color-grey);
+  border: 1px solid var(--color-grey-1);
   font-size: 16px;
   border-radius: 5px;
 }

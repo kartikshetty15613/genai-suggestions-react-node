@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { Rating } from "react-simple-star-rating";
 import Container from "../components/Container";
@@ -12,6 +12,7 @@ import styles from "../pages/RateIdea.module.css";
 
 export default function RateIdea() {
   const { ideaId } = useParams();
+  const navigate = useNavigate();
 
   const [idea, setIdea] = useState({});
   const [rating, setRating] = useState(0);

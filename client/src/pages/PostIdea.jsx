@@ -99,7 +99,7 @@ export default function PostIdea() {
       });
 
       setModalType("idea-(create/update)");
-      setModalMessage("Idea submitted successfully");
+      setModalMessage("Your idea has been submitted");
 
       setError("");
 

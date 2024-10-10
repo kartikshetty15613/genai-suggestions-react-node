@@ -3,10 +3,11 @@ const Idea = require('../models/Idea');
 const AppError = require('../utils/appError');
 
 exports.getAllIdeas = catchAsync(async (req, res, next) => {
-  const { page = 1, limit = 5 } = req.query;
-  const skip = (page - 1) * limit;
+  // const { page = 1, limit = 5 } = req.query;
+  // const skip = (page - 1) * limit;
 
-  const ideas = await Idea.find().limit(limit).skip(skip).sort('-createdAt');
+  const ideas = await Idea.find().sort('-createdAt');
+  // .limit(limit).skip(skip).sort('-createdAt');
 
   res.status(200).json({
     status: 'success',
@@ -61,14 +62,12 @@ exports.updateIdea = catchAsync(async (req, res, next) => {
 exports.bulkUpdate = catchAsync(async (req, res, next) => {
   const { ideas } = req.body;
 
-  console.log(ideas);
-
-  const updatedIdeas = await Promise.all(
+  await Promise.all(
     ideas.map(async (item) => {
       const idea = await Idea.findById(item._id);
 
-      idea.rating = req.body.rating;
-      idea.comment = req.body.comment;
+      idea.rating = item.rating;
+      idea.comment = item.comment;
 
       await idea.save();
 

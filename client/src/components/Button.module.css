@@ -9,6 +9,11 @@
   cursor: pointer;
 }
 
+.btn[disabled] {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
 .default {
   width: 125px;
 }

@@ -40,8 +40,10 @@ export default function Modal({
             <p className={styles.successMessage}>{msg}</p>
           </>
         )}
+
         {type === "loading" && <Spinner />}
-        {children}
+
+        {type !== "loading" && type !== "idea-(create/update)" && children}
       </div>
 
       {type !== "loading" && (
