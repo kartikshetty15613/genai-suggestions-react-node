@@ -58,7 +58,7 @@ export default function IdeaListItem({ idea, onRatingChange, onAddComment }) {
 
         <Button
           className={styles.viewButton}
-          onClick={() => navigate(`/ideas/${idea._id}/rate`)}
+          onClick={() => navigate(`/admin/ideas/${idea._id}/rate`)}
         >
           View
         </Button>

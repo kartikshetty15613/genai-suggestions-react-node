@@ -17,6 +17,10 @@ export default function RateIdea() {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
+  const [modalType, setModalType] = useState("");
+
   useEffect(() => {
     const fetchIdea = async () => {
       try {
@@ -42,8 +46,6 @@ export default function RateIdea() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    console.log({ rating, comment });
 
     try {
       setIsModalOpen(true);
@@ -72,6 +74,13 @@ export default function RateIdea() {
       <BreadCrumbsContainer>
         <BreadCrumbs crumbs={["Home", "Ideas", "Rate Idea"]} />
       </BreadCrumbsContainer>
+
+      <Modal
+        isOpen={isModalOpen}
+        toggleModal={setIsModalOpen}
+        type={modalType}
+        msg={modalMessage}
+      ></Modal>
 
       <Container>
         <div className={styles.ratingContainer}>

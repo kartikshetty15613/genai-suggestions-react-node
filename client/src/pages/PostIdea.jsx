@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Modal from "../components/Modal";
 
 import styles from "./PostIdea.module.css";
@@ -10,7 +11,6 @@ import BreadCrumbs from "../components/BreadCrumbs";
 import BreadCrumbsContainer from "../components/BreadCrumbsContainer";
 import FormError from "../components/FormError";
 
-import iconLightBulb from "../assets/icon-light-bulb.png";
 import ideaFormImage from "../assets/idea-form-image.png";
 
 export default function PostIdea() {
@@ -24,6 +24,7 @@ export default function PostIdea() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   const [modalType, setModalType] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -99,6 +100,10 @@ export default function PostIdea() {
       setModalMessage("Idea submitted successfully");
 
       setError("");
+
+      setTimeout(() => {
+        navigate("/");
+      }, 1000);
     } catch (err) {
       console.error(err);
       setIsModalOpen(true);
